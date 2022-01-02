@@ -16,6 +16,7 @@ export const AddTaskCardButton = (props: Props) => {
             ...taskCardList,
             {
                 id: taskCardId,
+                title: "いつかやる",
                 draggableId: `item1+${taskCardId}`,
             },
         ]);

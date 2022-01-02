@@ -1,13 +1,28 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import axios from "../../../node_modules/axios/index";
+
 import { TaskCardType } from "../types/TaskCard";
 import { AddTaskCardButton } from "./button/AddTaskCardButton";
 import { TaskCard } from "./TaskCard";
 
 export const TaskCards = () => {
-    const [taskCardList, setTaskCardList] = useState<TaskCardType[]>([
-        { id: 0, draggableId: "item0" },
-    ]);
+    const [taskCardList, setTaskCardList] = useState<TaskCardType[]>([]);
+    useEffect(() => {
+        getPostsData();
+    }, []);
+
+    //一覧情報を取得
+    const getPostsData = () => {
+        axios
+            .get("/api/task_cards")
+            .then((response: any) => {
+                setTaskCardList(response.data);
+            })
+            .catch(() => {
+                console.log("通信に失敗しました");
+            });
+    };
 
     const handleDragEnd = (result: any) => {
         // タスクカードを並び替える
