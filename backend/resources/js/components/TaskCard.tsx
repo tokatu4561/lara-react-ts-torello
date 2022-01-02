@@ -8,47 +8,49 @@ import { AddTaskInput } from "./input/AddTaskInput";
 import { Tasks } from "./Tasks";
 
 type Props = {
-  key: number;
-  index: number;
-  draggableId: string;
-  taskCardList: TaskCardType[];
-  setTaskCardList: any;
+    index: number;
+    taskCard: any;
+    taskCardList: TaskCardType[];
+    setTaskCardList: any;
 };
 
 export const TaskCard = (props: Props) => {
-  const { key, index, draggableId, taskCardList, setTaskCardList } = props;
-  const [inputText, setInputText] = useState<string>("");
-  const [taskList, setTaskList] = useState<TaskType[]>([]);
+    const { index, taskCard, taskCardList, setTaskCardList } = props;
+    const [inputText, setInputText] = useState<string>("");
+    const [taskList, setTaskList] = useState<TaskType[]>([]);
 
-  return (
-    <Draggable draggableId={draggableId} index={index}>
-      {(provided) => (
-        <div
-          className="taskCard"
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-        >
-          <div className="flex-area" {...provided.dragHandleProps}>
-            <TaskCardTitle />
-            <DeleteTaskCardButton
-              taskCardId={key}
-              taskCardList={taskCardList}
-              setTaskCardList={setTaskCardList}
-            />
-          </div>
-          <AddTaskInput
-            inputText={inputText}
-            setInputText={setInputText}
-            taskList={taskList}
-            setTaskList={setTaskList}
-          />
-          <Tasks
-            inputText={inputText}
-            taskList={taskList}
-            setTaskList={setTaskList}
-          />
-        </div>
-      )}
-    </Draggable>
-  );
+    return (
+        <Draggable draggableId={taskCard.draggableId} index={index}>
+            {(provided) => (
+                <div
+                    className="bg-white mr-4 rounded overflow-hidden shadow-lg p-4"
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                >
+                    <div
+                        className="flex mb-4 justify-between"
+                        {...provided.dragHandleProps}
+                    >
+                        <TaskCardTitle />
+                        <DeleteTaskCardButton
+                            taskCardId={taskCard.id}
+                            taskCardList={taskCardList}
+                            setTaskCardList={setTaskCardList}
+                        />
+                    </div>
+                    <AddTaskInput
+                        inputText={inputText}
+                        setInputText={setInputText}
+                        taskList={taskList}
+                        setTaskList={setTaskList}
+                    />
+                    <Tasks
+                        inputText={inputText}
+                        taskList={taskList}
+                        setTaskList={setTaskList}
+                    />
+                </div>
+            )}
+        </Draggable>
+    );
 };

@@ -70,22 +70,6 @@ export const Header = () => {
                                 テーブル
                             </a>
                             <a
-                                href="form.html"
-                                className="
-                p-2
-                lg:px-4
-                md:mx-2
-                text-gray-600
-                rounded
-                hover:bg-gray-200
-                hover:text-gray-700
-                transition-colors
-                duration-300
-              "
-                            >
-                                フォーム
-                            </a>
-                            <a
                                 href="item_index.html"
                                 className="
                 p-2
@@ -99,23 +83,7 @@ export const Header = () => {
                 duration-300
               "
                             >
-                                商品一覧
-                            </a>
-                            <a
-                                href="item_detail.html"
-                                className="
-                p-2
-                lg:px-4
-                md:mx-2
-                text-gray-600
-                rounded
-                hover:bg-gray-200
-                hover:text-gray-700
-                transition-colors
-                duration-300
-              "
-                            >
-                                商品詳細
+                                目標一覧
                             </a>
                         </div>
                     </div>

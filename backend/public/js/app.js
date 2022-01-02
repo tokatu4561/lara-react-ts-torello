@@ -26,15 +26,15 @@ __webpack_require__.r(__webpack_exports__);
 function App() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_Header__WEBPACK_IMPORTED_MODULE_2__.Header, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-      className: "min-h-screen bg-gray-100",
+      className: "min-h-screen bg-gray-300",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
         className: "py-12",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
           className: "max-w-7xl mx-auto sm:px-6 lg:px-8",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-            className: "bg-white overflow-hidden shadow-sm sm:rounded-lg",
+            className: "overflow-hidden shadow-sm sm:rounded-lg",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
-              className: "p-6 bg-white border-b border-gray-200",
+              className: "p-6 border-b border-gray-200",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components_TaskCards__WEBPACK_IMPORTED_MODULE_3__.TaskCards, {})
             })
           })
@@ -106,17 +106,9 @@ var Header = function Header() {
               className: " p-2 lg:px-4 md:mx-2 text-gray-600 rounded hover:bg-gray-200 hover:text-gray-700 transition-colors duration-300 ",
               children: "\u30C6\u30FC\u30D6\u30EB"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-              href: "form.html",
-              className: " p-2 lg:px-4 md:mx-2 text-gray-600 rounded hover:bg-gray-200 hover:text-gray-700 transition-colors duration-300 ",
-              children: "\u30D5\u30A9\u30FC\u30E0"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
               href: "item_index.html",
               className: " p-2 lg:px-4 md:mx-2 text-gray-600 rounded hover:bg-gray-200 hover:text-gray-700 transition-colors duration-300 ",
-              children: "\u5546\u54C1\u4E00\u89A7"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-              href: "item_detail.html",
-              className: " p-2 lg:px-4 md:mx-2 text-gray-600 rounded hover:bg-gray-200 hover:text-gray-700 transition-colors duration-300 ",
-              children: "\u5546\u54C1\u8A73\u7D30"
+              children: "\u76EE\u6A19\u4E00\u89A7"
             })]
           })]
         })
@@ -169,7 +161,7 @@ var Task = function Task(props) {
     draggableId: task.draggableId,
     children: function children(provided) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", _objectSpread(_objectSpread(_objectSpread({
-        className: "taskBox",
+        className: "bg-gray-200 p-4 mb-4 border-solid shadow-lg flex justify-between",
         ref: provided.innerRef
       }, provided.draggableProps), provided.dragHandleProps), {}, {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
@@ -224,9 +216,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var TaskCard = function TaskCard(props) {
-  var key = props.key,
-      index = props.index,
-      draggableId = props.draggableId,
+  var index = props.index,
+      taskCard = props.taskCard,
       taskCardList = props.taskCardList,
       setTaskCardList = props.setTaskCardList;
 
@@ -239,18 +230,18 @@ var TaskCard = function TaskCard(props) {
       setTaskList = _b[1];
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_6__.Draggable, {
-    draggableId: draggableId,
+    draggableId: taskCard.draggableId,
     index: index,
     children: function children(provided) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", _objectSpread(_objectSpread({
-        className: "taskCard",
+        className: "bg-white mr-4 rounded overflow-hidden shadow-lg p-4",
         ref: provided.innerRef
       }, provided.draggableProps), {}, {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", _objectSpread(_objectSpread({
-          className: "flex-area"
+          className: "flex mb-4 justify-between"
         }, provided.dragHandleProps), {}, {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_button_TaskCardTitle__WEBPACK_IMPORTED_MODULE_2__.TaskCardTitle, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_button_DeleteTaskCardButton__WEBPACK_IMPORTED_MODULE_1__.DeleteTaskCardButton, {
-            taskCardId: key,
+            taskCardId: taskCard.id,
             taskCardList: taskCardList,
             setTaskCardList: setTaskCardList
           })]
@@ -309,10 +300,12 @@ var TaskCards = function TaskCards() {
 
   var handleDragEnd = function handleDragEnd(result) {
     // タスクカードを並び替える
+    console.log(taskCardList);
     var newTaskList = taskCardList; //　ドラッグ対象を切り取ってドロップ対象の場所に追加する
 
     var removedTask = newTaskList.splice(result.source.index, 1);
-    taskCardList.splice(result.destination.index, 0, removedTask[0]);
+    newTaskList.splice(result.destination.index, 0, removedTask[0]);
+    console.log(newTaskList);
     setTaskCardList(newTaskList);
   };
 
@@ -323,13 +316,13 @@ var TaskCards = function TaskCards() {
       direction: "horizontal",
       children: function children(provided) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", _objectSpread(_objectSpread({
-          className: "taskCardsArea"
+          className: "flex"
         }, provided.droppableProps), {}, {
           ref: provided.innerRef,
           children: [taskCardList.map(function (taskCard, index) {
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_TaskCard__WEBPACK_IMPORTED_MODULE_2__.TaskCard, {
               index: index,
-              draggableId: taskCard.draggableId,
+              taskCard: taskCard,
               taskCardList: taskCardList,
               setTaskCardList: setTaskCardList
             }, taskCard.id);
@@ -449,13 +442,14 @@ var AddTaskCardButton = function AddTaskCardButton(props) {
       id: taskCardId,
       draggableId: "item1+".concat(taskCardId)
     }], false));
+    console.log(taskCardList);
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-    className: "addTaskCardBtnArea",
+    className: "rounded-full ml-4 mt-8 w-8 h-8 shadow-md text-center bg-indigo-400",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("button", {
       onClick: onCliclAddTaskCard,
-      className: "addTaskCardBtn",
+      className: "py-2",
       children: "\uFF0B"
     })
   });
@@ -621,13 +615,13 @@ var AddTaskInput = function AddTaskInput(props) {
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+    className: "mb-4",
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("form", {
       action: "",
       onSubmit: handleSubmit,
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("input", {
-        className: "taskAddInput",
         type: "text",
-        placeholder: "\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044",
+        placeholder: "\u3053\u3053\u306B\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044",
         onChange: handleChangeText,
         value: inputText
       })
