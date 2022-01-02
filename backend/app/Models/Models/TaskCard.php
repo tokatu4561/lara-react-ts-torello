@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class TaskCard extends Model
 {
     use HasFactory;
+
+    protected $table = "taskCards";
 }

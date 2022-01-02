@@ -15,14 +15,18 @@ export const TaskCards = () => {
     //一覧情報を取得
     const getPostsData = () => {
         axios
-            .get("/api/task_cards")
-            .then((response: any) => {
+            .get<TaskCardType[]>("api/task_cards")
+            .then((response) => {
                 setTaskCardList(response.data);
             })
-            .catch(() => {
+            .catch((e) => {
                 console.log("通信に失敗しました");
+                console.log(e.message);
             });
     };
+
+    // 現在のタスクカードを保存する
+    const onClickSaveTask = () => {};
 
     const handleDragEnd = (result: any) => {
         // タスクカードを並び替える
@@ -31,6 +35,7 @@ export const TaskCards = () => {
         const removedTask = newTaskList.splice(result.source.index, 1);
         newTaskList.splice(result.destination.index, 0, removedTask[0]);
 
+        console.log(taskCardList);
         setTaskCardList(newTaskList);
     };
 
@@ -57,6 +62,7 @@ export const TaskCards = () => {
                             taskCardList={taskCardList}
                             setTaskCardList={setTaskCardList}
                         />
+                        <button onClick={onClickSaveTask}>保存する</button>
                     </div>
                 )}
             </Droppable>

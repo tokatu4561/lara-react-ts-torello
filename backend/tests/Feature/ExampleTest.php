@@ -8,13 +8,12 @@ use Tests\TestCase;
 class ExampleTest extends TestCase
 {
     /**
-     * A basic test example.
-     *
-     * @return void
+     * @test
      */
-    public function test_example()
+    public function 一覧を取得()
     {
-        $response = $this->get('/');
+        $response = $this->getJson('api/task_cards');
+        dd($response->json());
 
         $response->assertStatus(200);
     }

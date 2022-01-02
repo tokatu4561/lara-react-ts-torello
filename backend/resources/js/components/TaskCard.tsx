@@ -31,7 +31,7 @@ export const TaskCard = (props: Props) => {
                         className="flex mb-4 justify-between"
                         {...provided.dragHandleProps}
                     >
-                        <TaskCardTitle />
+                        <TaskCardTitle title={taskCard.title} />
                         <DeleteTaskCardButton
                             taskCardId={taskCard.id}
                             taskCardList={taskCardList}
