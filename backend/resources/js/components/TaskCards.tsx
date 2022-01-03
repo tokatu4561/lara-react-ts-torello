@@ -8,6 +8,8 @@ import { TaskCard } from "./TaskCard";
 
 export const TaskCards = () => {
     const [taskCardList, setTaskCardList] = useState<TaskCardType[]>([]);
+    const [loading, setLoading] = useState(false);
+
     useEffect(() => {
         getPostsData();
     }, []);
@@ -26,7 +28,18 @@ export const TaskCards = () => {
     };
 
     // 現在のタスクカードを保存する
-    const onClickSaveTask = () => {};
+    const onClickSaveTask = async () => {
+        await axios
+            .post("/api/task_cards/create", {
+                taskCards: taskCardList,
+            })
+            .then((res) => {
+                getPostsData();
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
 
     const handleDragEnd = (result: any) => {
         // タスクカードを並び替える

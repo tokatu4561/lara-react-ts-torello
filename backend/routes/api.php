@@ -20,4 +20,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'api'], function () {
     Route::get('task_cards', 'App\Http\Controllers\Api\TaskCardController@index');
+    Route::post('task_cards/create', 'App\Http\Controllers\Api\TaskCardController@create');
 });

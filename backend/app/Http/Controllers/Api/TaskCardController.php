@@ -17,4 +17,19 @@ class TaskCardController extends Controller
         $taskCards = TaskCard::all();
         return response()->json($taskCards, 200);
     }
+
+    public function create(Request $request)
+    {
+        TaskCard::query()->delete();
+        $newTaskCards = array();
+        foreach ($request->taskCards as $taskCard) {
+            $newTaskCard = new TaskCard;
+            $newTaskCard->draggableId = $taskCard['draggableId'];
+            $newTaskCard->title = $taskCard['title'];
+            $newTaskCard->save();
+            array_push($newTaskCards, $newTaskCard);
+        }
+
+        return response()->json($newTaskCards, 200);
+    }
 }
