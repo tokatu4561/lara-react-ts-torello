@@ -33,7 +33,7 @@ class CreateAppTable extends Migration
             $table->string('text');
             $table->timestamps();
 
-            $table->foreign('taskCardId')->references('id')->on('taskCards');
+            $table->foreign('taskCardId')->references('id')->on('taskCards')->onDelete('cascade');;
         });
     }
 

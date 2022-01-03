@@ -18,9 +18,13 @@ class TaskCardController extends Controller
         return response()->json($taskCards, 200);
     }
 
+    /* 表示しているタスクカードを更新する
+    * 
+    */
     public function create(Request $request)
     {
         TaskCard::query()->delete();
+
         $newTaskCards = array();
         foreach ($request->taskCards as $taskCard) {
             $newTaskCard = new TaskCard;

@@ -2491,36 +2491,48 @@ var __generator = undefined && undefined.__generator || function (thisArg, body)
 
 
 
+
 var TaskCards = function TaskCards() {
   var _a = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       taskCardList = _a[0],
       setTaskCardList = _a[1];
 
+  var _b = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      loading = _b[0],
+      setLoading = _b[1];
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     getPostsData();
   }, []); //一覧情報を取得
 
-  var getPostsData = function getPostsData() {
+  var getPostsData = (0,react__WEBPACK_IMPORTED_MODULE_0__.useCallback)(function () {
+    setLoading(true);
     _node_modules_axios_index__WEBPACK_IMPORTED_MODULE_1___default().get("api/task_cards").then(function (response) {
       setTaskCardList(response.data);
     })["catch"](function (e) {
       console.log("通信に失敗しました");
       console.log(e.message);
+    })["finally"](function () {
+      setLoading(false);
     });
-  }; // 現在のタスクカードを保存する
-
+  }, []); // 現在のタスクカードを保存する
 
   var onClickSaveTask = function onClickSaveTask() {
     return __awaiter(void 0, void 0, void 0, function () {
       return __generator(this, function (_a) {
         switch (_a.label) {
           case 0:
+            setLoading(true);
             return [4
             /*yield*/
             , _node_modules_axios_index__WEBPACK_IMPORTED_MODULE_1___default().post("/api/task_cards/create", {
               taskCards: taskCardList
-            }).then(function (res) {})["catch"](function (error) {
+            }).then(function (res) {
+              setLoading(false);
+            })["catch"](function (error) {
               console.log(error);
+            })["finally"](function () {
+              setLoading(false);
             })];
 
           case 1:
@@ -2544,32 +2556,39 @@ var TaskCards = function TaskCards() {
     setTaskCardList(newTaskList);
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_5__.DragDropContext, {
-    onDragEnd: handleDragEnd,
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_5__.Droppable, {
-      droppableId: "droppable",
-      direction: "horizontal",
-      children: function children(provided) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", _objectSpread(_objectSpread({
-          className: "flex"
-        }, provided.droppableProps), {}, {
-          ref: provided.innerRef,
-          children: [taskCardList.map(function (taskCard, index) {
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_TaskCard__WEBPACK_IMPORTED_MODULE_3__.TaskCard, {
-              index: index,
-              taskCard: taskCard,
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
+    children: loading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      className: "flex justify-center",
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+        className: "animate-spin h-10 w-10 border-4 border-blue-500 rounded-full border-t-transparent"
+      })
+    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_5__.DragDropContext, {
+      onDragEnd: handleDragEnd,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_beautiful_dnd__WEBPACK_IMPORTED_MODULE_5__.Droppable, {
+        droppableId: "droppable",
+        direction: "horizontal",
+        children: function children(provided) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", _objectSpread(_objectSpread({
+            className: "flex"
+          }, provided.droppableProps), {}, {
+            ref: provided.innerRef,
+            children: [taskCardList.map(function (taskCard, index) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_TaskCard__WEBPACK_IMPORTED_MODULE_3__.TaskCard, {
+                index: index,
+                taskCard: taskCard,
+                taskCardList: taskCardList,
+                setTaskCardList: setTaskCardList
+              }, taskCard.id);
+            }), provided.placeholder, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_button_AddTaskCardButton__WEBPACK_IMPORTED_MODULE_2__.AddTaskCardButton, {
               taskCardList: taskCardList,
               setTaskCardList: setTaskCardList
-            }, taskCard.id);
-          }), provided.placeholder, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_button_AddTaskCardButton__WEBPACK_IMPORTED_MODULE_2__.AddTaskCardButton, {
-            taskCardList: taskCardList,
-            setTaskCardList: setTaskCardList
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
-            onClick: onClickSaveTask,
-            children: "\u4FDD\u5B58\u3059\u308B"
-          })]
-        }));
-      }
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
+              onClick: onClickSaveTask,
+              children: "\u4FDD\u5B58\u3059\u308B"
+            })]
+          }));
+        }
+      })
     })
   });
 };
