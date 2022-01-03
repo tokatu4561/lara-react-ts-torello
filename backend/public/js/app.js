@@ -2294,7 +2294,9 @@ var TaskCard = function TaskCard(props) {
           className: "flex mb-4 justify-between"
         }, provided.dragHandleProps), {}, {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_button_TaskCardTitle__WEBPACK_IMPORTED_MODULE_2__.TaskCardTitle, {
-            title: taskCard.title
+            taskCard: taskCard,
+            taskCardList: taskCardList,
+            setTaskCardList: setTaskCardList
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_button_DeleteTaskCardButton__WEBPACK_IMPORTED_MODULE_1__.DeleteTaskCardButton, {
             taskCardId: taskCard.id,
             taskCardList: taskCardList,
@@ -2544,10 +2546,10 @@ var TaskCards = function TaskCards() {
         }
       });
     });
-  };
+  }; // タスクカードを並び替える
+
 
   var handleDragEnd = function handleDragEnd(result) {
-    // タスクカードを並び替える
     var newTaskList = taskCardList; //　ドラッグ対象を切り取ってドロップ対象の場所に追加する
 
     var removedTask = newTaskList.splice(result.source.index, 1);
@@ -2773,16 +2775,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
-var TaskCardTitle = function TaskCardTitle(_a) {
-  var title = _a.title;
+var TaskCardTitle = function TaskCardTitle(props) {
+  var taskCard = props.taskCard,
+      taskCardList = props.taskCardList,
+      setTaskCardList = props.setTaskCardList;
 
-  var _b = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-      isClick = _b[0],
-      setIsClick = _b[1];
+  var _a = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      isClick = _a[0],
+      setIsClick = _a[1];
 
-  var _c = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(title),
-      inputCardTitle = _c[0],
-      setInputCardTitle = _c[1];
+  var _b = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(taskCard.title),
+      inputCardTitle = _b[0],
+      setInputCardTitle = _b[1];
 
   var handleClick = function handleClick() {
     setIsClick(true);
@@ -2795,6 +2799,15 @@ var TaskCardTitle = function TaskCardTitle(_a) {
 
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
+    var newTaskCardList = taskCardList.map(function (iteraTaskCard) {
+      if (iteraTaskCard.id !== taskCard.id) {
+        return iteraTaskCard;
+      }
+
+      iteraTaskCard.title = inputCardTitle;
+      return iteraTaskCard;
+    });
+    setTaskCardList(newTaskCardList);
     setIsClick(false);
   };
 

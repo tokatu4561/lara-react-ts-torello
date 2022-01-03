@@ -1,8 +1,19 @@
 import React, { ChangeEvent, useState } from "react";
+import { TaskCardType } from "../../types/TaskCard";
 
-export const TaskCardTitle = ({ title }: { title: string }) => {
+type Props = {
+    taskCard: TaskCardType;
+    taskCardList: TaskCardType[];
+    setTaskCardList: any;
+};
+
+export const TaskCardTitle = (props: Props) => {
+    const { taskCard, taskCardList, setTaskCardList } = props;
+
     const [isClick, setIsClick] = useState<boolean>(false);
-    const [inputCardTitle, setInputCardTitle] = useState<string>(title);
+    const [inputCardTitle, setInputCardTitle] = useState<string>(
+        taskCard.title
+    );
 
     const handleClick = () => {
         setIsClick(true);
@@ -13,6 +24,16 @@ export const TaskCardTitle = ({ title }: { title: string }) => {
     };
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+
+        const newTaskCardList = taskCardList.map((iteraTaskCard) => {
+            if (iteraTaskCard.id !== taskCard.id) {
+                return iteraTaskCard;
+            }
+            iteraTaskCard.title = inputCardTitle;
+            return iteraTaskCard;
+        });
+        setTaskCardList(newTaskCardList);
+
         setIsClick(false);
     };
     const handleBlur = (e: React.FormEvent) => {
