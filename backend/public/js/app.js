@@ -2155,10 +2155,6 @@ var Header = function Header() {
               className: "p-2 lg:px-4 md:mx-2 text-white rounded bg-indigo-600",
               children: "Home"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-              href: "table.html",
-              className: " p-2 lg:px-4 md:mx-2 text-gray-600 rounded hover:bg-gray-200 hover:text-gray-700 transition-colors duration-300 ",
-              children: "\u30C6\u30FC\u30D6\u30EB"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
               href: "item_index.html",
               className: " p-2 lg:px-4 md:mx-2 text-gray-600 rounded hover:bg-gray-200 hover:text-gray-700 transition-colors duration-300 ",
               children: "\u76EE\u6A19\u4E00\u89A7"
@@ -2586,6 +2582,7 @@ var TaskCards = function TaskCards() {
               setTaskCardList: setTaskCardList
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
               onClick: onClickSaveTask,
+              className: "bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full",
               children: "\u4FDD\u5B58\u3059\u308B"
             })]
           }));

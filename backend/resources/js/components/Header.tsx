@@ -54,22 +54,6 @@ export const Header = () => {
                                 Home
                             </a>
                             <a
-                                href="table.html"
-                                className="
-                p-2
-                lg:px-4
-                md:mx-2
-                text-gray-600
-                rounded
-                hover:bg-gray-200
-                hover:text-gray-700
-                transition-colors
-                duration-300
-              "
-                            >
-                                テーブル
-                            </a>
-                            <a
                                 href="item_index.html"
                                 className="
                 p-2
