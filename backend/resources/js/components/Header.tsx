@@ -1,6 +1,8 @@
 import React from "react";
+import { BrowserRouter, Link, useLocation } from "react-router-dom";
 
 export const Header = () => {
+    const location = useLocation();
     return (
         <>
             <header>
@@ -47,14 +49,14 @@ export const Header = () => {
                             id="navbar-collapse"
                             className="hidden md:flex flex-col md:flex-row md:ml-auto mt-3 md:mt-0"
                         >
-                            <a
-                                href="index.html"
-                                className="p-2 lg:px-4 md:mx-2 text-white rounded bg-indigo-600"
+                            <Link
+                                to="/"
+                                className="p-2 lg:px-4 md:mx-2 text-gray-600 rounde"
                             >
                                 Home
-                            </a>
-                            <a
-                                href="item_index.html"
+                            </Link>
+                            <Link
+                                to="/target"
                                 className="
                 p-2
                 lg:px-4
@@ -68,7 +70,7 @@ export const Header = () => {
               "
                             >
                                 目標一覧
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </nav>
